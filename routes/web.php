@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ Route::get('/', function () {
 })->name('front.homepage');
 
 // Admin routes group
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::resource('/categories', CategoryController::class);
 });
