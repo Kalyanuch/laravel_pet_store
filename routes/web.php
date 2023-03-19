@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('front.homepage');
 
 // Admin routes group
 Route::group(['prefix' => 'admin'], function() {
