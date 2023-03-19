@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('parent_id', FALSE, TRUE)->nullable(FALSE)->default(0);
             $table->string('title')->nullable(FALSE)->default('');
-            $table->string('slug')->nullable(FALSE)->default('');
+            $table->string('slug')->nullable(FALSE)->default('')->unique();
             $table->tinyInteger('status')->nullable(FALSE)->default(1);
             $table->timestamps();
         });
