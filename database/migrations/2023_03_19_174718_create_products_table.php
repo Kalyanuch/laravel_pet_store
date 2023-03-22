@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug')->nullable(FALSE)->default('')->unique();
             $table->double('price')->nullable(FALSE)->default(0);
             $table->integer('quantity', FALSE, TRUE)->nullable(FALSE)->default(0);
+            $table->integer('sort_order')->nullable(FALSE)->default(0);
             $table->tinyInteger('status')->nullable(FALSE)->default(1);
             $table->timestamps();
         });
