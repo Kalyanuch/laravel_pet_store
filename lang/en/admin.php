@@ -40,4 +40,14 @@ return [
         'success' => 'Categories list edited successfully',
     ],
     // Categories page translations
+    // Products page translations
+    'products' => [
+        'title' => 'Products',
+        'list' => 'Products list',
+        'edit' => 'Edit product',
+        'add_new' => 'Add new product',
+//        'entry_parent' => 'Parent category',
+        'success' => 'Products list edited successfully',
+    ],
+    // Products page translations
 ];
