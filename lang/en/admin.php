@@ -20,8 +20,10 @@ return [
     'column_title' => 'Title',
     'column_status' => 'Status',
     'column_slug' => 'Slug',
+    'column_sort_order' => 'Sort order',
     'entry_title' => 'Title',
     'entry_status' => 'Status',
+    'entry_sort_order' => 'Sort order',
     // Common admin translations
     // Dashboard page translations
     'dashboard' => [

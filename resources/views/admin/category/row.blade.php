@@ -2,6 +2,7 @@
     <td>{{ $item->id }}.</td>
     <td>{{ $title_prefix }}{{ $item->title }}</td>
     <td>{{ $item->slug }}</td>
+    <td>{{ $item->sort_order }}</td>
     <td>@if($item->status) {{ __('admin.enabled') }} @else {{ __('admin.disabled') }} @endif</td>
     <td>
         <a class="btn btn-app bg-success" href="{{ route('admin.categories.edit', ['category' => $item->id]) }}">

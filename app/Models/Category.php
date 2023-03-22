@@ -14,7 +14,7 @@ class Category extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['title', 'status', 'parent_id'];
+    protected $fillable = ['title', 'status', 'parent_id', 'sort_order'];
 
     /**
      * Gets category products.
@@ -51,5 +51,12 @@ class Category extends Model
     public function scopeRootCategories(Builder $query): void
     {
         $query->where('parent_id', '=', 0);
+    }
+
+    public function setSortOrderAttribute($value)
+    {
+        if(empty($value)) {
+            $this->attributes['sort_order'] = 0;
+        }
     }
 }

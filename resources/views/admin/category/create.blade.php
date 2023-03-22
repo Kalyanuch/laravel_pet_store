@@ -71,6 +71,19 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="sort_order">{{ __('admin.entry_sort_order') }}</label>
+                            <input type="text"
+                                   name="sort_order"
+                                   class="form-control @error('sort_order') is-invalid @enderror"
+                                   id="sort_order"
+                                   value="{{ old('sort_order') }}"
+                                   placeholder="{{ __('admin.entry_sort_order') }}"
+                            >
+                            @error('sort_order')
+                            <span id="sort-order-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="status">{{ __('admin.entry_status') }}</label>
                             <select name="status" class="form-control" id="status">
                                 <option value="0" @if(old('status') == 0) selected="selected" @endif>{{ __('admin.disabled') }}</option>

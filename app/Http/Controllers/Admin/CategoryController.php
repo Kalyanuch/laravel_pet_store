@@ -63,7 +63,13 @@ class CategoryController extends Controller
 //            'title' => 'required',
 //        ]);
 
-        Category::create($request->all());
+        $data = $request->all();
+
+        if (empty($data['sort_order'])) {
+            $data['sort_order'] = 0;
+        }
+
+        Category::create($data);
 
 //        $request->session()->flash('success', TRUE);
 
@@ -109,6 +115,7 @@ class CategoryController extends Controller
             $category->title = $request->get('title');
             $category->status = $request->get('status');
             $category->parent_id = $request->get('parent_id');
+            $category->sort_order = $request->get('sort_order') ?? 0;
             $category->save();
         }
 

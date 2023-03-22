@@ -72,6 +72,16 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="sort_order">{{ __('admin.entry_sort_order') }}</label>
+                            <input type="text"
+                                   name="sort_order"
+                                   class="form-control"
+                                   id="sort_order"
+                                   value="{{ old('title', $category->sort_order) }}"
+                                   placeholder="{{ __('admin.entry_sort_order') }}"
+                            >
+                        </div>
+                        <div class="form-group">
                             <label for="status">{{ __('admin.entry_status') }}</label>
                             <select name="status" class="form-control" id="status">
                                 <option value="0" @if(old('status', $category->status) == 0) selected="selected" @endif>{{ __('admin.disabled') }}</option>

@@ -58,6 +58,7 @@
                                 <th style="width: 10px">#</th>
                                 <th>{{ __('admin.column_title') }}</th>
                                 <th>{{ __('admin.column_slug') }}</th>
+                                <th>{{ __('admin.column_sort_order') }}</th>
                                 <th>{{ __('admin.column_status') }}</th>
                                 <th>{{ __('admin.column_actions') }}</th>
                             </tr>

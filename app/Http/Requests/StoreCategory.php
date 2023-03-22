@@ -22,7 +22,10 @@ class StoreCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'title' => ['required', 'max:250'],
+            'status' => ['in:0,1', 'required'],
+            'parent_id' => ['integer', 'required'],
+            'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
         ];
     }
 }
