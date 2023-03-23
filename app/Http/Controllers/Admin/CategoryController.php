@@ -89,11 +89,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
-            abort(404);
-        }
+        $category = Category::findOrFail($id);
 
         $parent = Category::rootCategories()->get();
 
@@ -105,11 +101,7 @@ class CategoryController extends Controller
      */
     public function update(StoreCategory $request, string $id)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
-            abort(404);
-        }
+        $category = Category::findOrFail($id);
 
         if ($category) {
             $category->title = $request->get('title');
@@ -133,11 +125,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
-            abort(404);
-        }
+        $category = Category::findOrFail($id);
 
         $child = Category::where('parent_id', '=', $id)->get();
 
