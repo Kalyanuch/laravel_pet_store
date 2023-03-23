@@ -13,6 +13,8 @@ class Product extends Model
 {
     use HasFactory, Sluggable;
 
+    protected $fillable = ['title', 'sort_order', 'status', 'description'];
+
     /**
      * Gets product categories.
      *

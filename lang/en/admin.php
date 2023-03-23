@@ -22,6 +22,7 @@ return [
     'column_slug' => 'Slug',
     'column_sort_order' => 'Sort order',
     'entry_title' => 'Title',
+    'entry_description' => 'Description',
     'entry_status' => 'Status',
     'entry_sort_order' => 'Sort order',
     // Common admin translations
