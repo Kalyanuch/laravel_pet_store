@@ -74,7 +74,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        @include('admin.common.pagination_component')
+                        @include('admin.common.pagination_component', ['items' => $categories])
                     @else
                         <p class="lead">{{ __('admin.list_empty') }}.</p>
                     @endif
