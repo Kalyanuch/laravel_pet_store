@@ -59,17 +59,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategory $request)
     {
-//        $request->validate([
-//            'title' => 'required',
-//        ]);
-
-        $data = $request->all();
-
-        if (empty($data['sort_order'])) {
-            $data['sort_order'] = 0;
-        }
-
-        Category::create($data);
+        Category::create($request->all());
 
 //        $request->session()->flash('success', TRUE);
 
@@ -107,7 +97,7 @@ class CategoryController extends Controller
             $category->title = $request->get('title');
             $category->status = $request->get('status');
             $category->parent_id = $request->get('parent_id');
-            $category->sort_order = $request->get('sort_order') ?? 0;
+            $category->sort_order = $request->get('sort_order');
             $category->save();
         }
 

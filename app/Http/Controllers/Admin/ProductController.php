@@ -53,13 +53,7 @@ class ProductController extends Controller
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
         ]);
 
-        $data = $request->all();
-
-        if (empty($data['sort_order'])) {
-            $data['sort_order'] = 0;
-        }
-
-        Product::create($data);
+        Product::create($request->all());
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
     }
@@ -108,11 +102,7 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $data = $request->all();
-
-        $data['sort_order'] = $data['sort_order'] ?? 0;
-
-        $product->fill($data);
+        $product->fill($request->all());
 
         $product->save();
 

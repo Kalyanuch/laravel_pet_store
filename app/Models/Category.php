@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,10 +54,13 @@ class Category extends Model
         $query->where('parent_id', '=', 0);
     }
 
-    public function setSortOrderAttribute($value)
+    /**
+     * Sets the sort order default value.
+     */
+    protected function sort_order(): Attribute
     {
-        if(empty($value)) {
-            $this->attributes['sort_order'] = 0;
-        }
+        return Attribute::make(
+            set: fn (string $value) => $value ?? 0,
+        );
     }
 }
