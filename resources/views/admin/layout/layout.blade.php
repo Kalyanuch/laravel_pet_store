@@ -195,38 +195,38 @@
                             <p>{{ __('admin.dashboard.dashboard') }}</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item{{ (substr_count(Route::currentRouteName(), 'admin.categories') > 0) ? ' menu-is-opening menu-open' : '' }}">
                         <a href="{{ route('admin.categories.index') }}" class="nav-link">
                             <p>{{ __('admin.categories.title') }} <i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                                <a href="{{ route('admin.categories.index') }}" class="nav-link{{ Route::currentRouteName() == 'admin.categories.index' ? ' active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ __('admin.categories.list') }}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.categories.create') }}" class="nav-link">
+                                <a href="{{ route('admin.categories.create') }}" class="nav-link{{ Route::currentRouteName() == 'admin.categories.create' ? ' active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ __('admin.categories.add_new') }}</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item{{ (substr_count(Route::currentRouteName(), 'admin.products') > 0) ? ' menu-is-opening menu-open' : '' }}">
                         <a href="{{ route('admin.products.index') }}" class="nav-link">
                             <p>{{ __('admin.products.title') }} <i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.index') }}" class="nav-link">
+                                <a href="{{ route('admin.products.index') }}" class="nav-link{{ Route::currentRouteName() == 'admin.products.index' ? ' active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ __('admin.products.list') }}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.create') }}" class="nav-link">
+                                <a href="{{ route('admin.products.create') }}" class="nav-link{{ Route::currentRouteName() == 'admin.products.create' ? ' active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ __('admin.products.add_new') }}</p>
                                 </a>
