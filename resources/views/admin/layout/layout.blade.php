@@ -195,7 +195,7 @@
                             <p>{{ __('admin.dashboard.dashboard') }}</p>
                         </a>
                     </li>
-                    <li class="nav-item{{ (substr_count(Route::currentRouteName(), 'admin.categories') > 0) ? ' menu-is-opening menu-open' : '' }}">
+                    <li class="nav-item{{ Route::is('admin.categories*') ? ' menu-is-opening menu-open' : '' }}">
                         <a href="{{ route('admin.categories.index') }}" class="nav-link">
                             <p>{{ __('admin.categories.title') }} <i class="right fas fa-angle-left"></i></p>
                         </a>
@@ -214,7 +214,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item{{ (substr_count(Route::currentRouteName(), 'admin.products') > 0) ? ' menu-is-opening menu-open' : '' }}">
+                    <li class="nav-item{{ Route::is('admin.products*') ? ' menu-is-opening menu-open' : '' }}">
                         <a href="{{ route('admin.products.index') }}" class="nav-link">
                             <p>{{ __('admin.products.title') }} <i class="right fas fa-angle-left"></i></p>
                         </a>
@@ -230,7 +230,7 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{ __('admin.products.add_new') }}</p>
                                 </a>
-                            </li>
+                            </li> {{ Route::is() }}
                         </ul>
                     </li>
 
