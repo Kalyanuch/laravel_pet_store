@@ -43,11 +43,28 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">{{ __('front.text_contact') }}</a></li>
+                                    <li class="hassubs">
+                                        <a href="#">{{ __('front.text_account') }}</a>
+                                        <ul>
+                                            @auth()
+                                                <li><a href="{{ route('profile.edit') }}">{{ __('front.text_account') }}</a></li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <a href="{{ route('logout') }}" onclick="this.closest('form').submit(); return false;">{{ __('front.text_logout') }}</a>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li><a href="{{ route('login') }}">{{ __('front.text_login') }}</a></li>
+                                                <li><a href="{{ route('register') }}">{{ __('front.text_register') }}</a></li>
+                                            @endauth
+                                        </ul>
+                                    </li>
                                 </ul>
                             </nav>
                             <div class="header_extra ml-auto">
                                 <div class="shopping_cart">
-                                    <a href="cart.html">
+                                    <a href="{{ route('front.cart') }}">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>
@@ -132,7 +149,7 @@
                         <a href="{{ route('front.homepage') }}">{{ __('front.text_home') }}</a>
                     </li>
                     <li class="page_menu_item has-children menu_mm">
-                        <a href="categories.html">{{ __('front.text_categories') }}<i class="fa fa-angle-down"></i></a>
+                        <a href="#">{{ __('front.text_categories') }}<i class="fa fa-angle-down"></i></a>
                         <ul class="page_menu_selection menu_mm">
                             <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
                             <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
@@ -141,6 +158,23 @@
                         </ul>
                     </li>
                     <li class="page_menu_item menu_mm"><a href="#">{{ __('front.text_contact') }}<i class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item has-children menu_mm">
+                        <a href="#">{{ __('front.text_account') }}<i class="fa fa-angle-down"></i></a>
+                        <ul class="page_menu_selection menu_mm">
+                            @auth()
+                                <li class="page_menu_item menu_mm"><a href="{{ route('profile.edit') }}">{{ __('front.text_account') }}<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm">
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" onclick="this.closest('form').submit(); return false;">{{ __('front.text_logout') }}</a>
+                                    </form>
+                                </li>
+                            @else
+                                <li class="page_menu_item menu_mm"><a href="{{ route('login') }}">{{ __('front.text_login') }}<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="{{ route('register') }}">{{ __('front.text_register') }}<i class="fa fa-angle-down"></i></a></li>
+                            @endauth
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -168,7 +202,7 @@
             <div class="row">
                 <div class="col">
                     <div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
-                        <div class="footer_logo"><a href="index.html">Sublime.</a></div>
+                        <div class="footer_logo"><a href="{{ route('front.homepage') }}">Sublime.</a></div>
                         <div class="copyright ml-auto mr-auto"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>

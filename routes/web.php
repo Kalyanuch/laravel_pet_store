@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Front\Cart;
+use App\Http\Controllers\Front\Checkout;
+use App\Http\Controllers\Front\Category;
+use App\Http\Controllers\Front\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +25,11 @@ Route::get('/', function () {
 //    return view('welcome');
     return view('front.home');
 })->name('front.homepage');
+
+Route::get('/cart', [Cart::class, 'index'])->name('front.cart');
+Route::get('/checkout', [Checkout::class, 'index'])->name('front.checkout');
+Route::get('/category/{slug}', [Category::class, 'index'])->name('front.category');
+Route::get('/product/{slug}', [Product::class, 'index'])->name('front.product');
 
 // Admin routes group
 Route::middleware(['auth', 'is_admin'])->group(function () {
