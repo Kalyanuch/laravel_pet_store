@@ -2,6 +2,8 @@
     <td>{{ $item->id }}.</td>
     <td>{{ $item->title }}</td>
     <td>{{ $item->slug }}</td>
+    <td>{{ $item->price }}</td>
+    <td>{{ $item->quantity }}</td>
     <td>{{ $item->sort_order }}</td>
     <td>@if($item->status) {{ __('admin.enabled') }} @else {{ __('admin.disabled') }} @endif</td>
     <td>

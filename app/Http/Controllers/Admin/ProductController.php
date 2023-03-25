@@ -55,7 +55,9 @@ class ProductController extends Controller
             'description' => ['required', 'max:3000'],
             'status' => ['in:0,1', 'required'],
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
-            'category_id' => ['required'],
+            'category_id' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'quantity' => ['required', 'integer'],
         ]);
 
         $product = Product::create($request->all());
@@ -117,7 +119,9 @@ class ProductController extends Controller
             'description' => ['required', 'max:3000'],
             'status' => ['in:0,1', 'required'],
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
-            'category_id' => ['required'],
+            'category_id' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'quantity' => ['required', 'integer'],
         ]);
 
         $product = Product::findOrFail($id);

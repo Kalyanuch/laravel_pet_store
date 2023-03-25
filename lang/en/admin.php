@@ -21,10 +21,14 @@ return [
     'column_status' => 'Status',
     'column_slug' => 'Slug',
     'column_sort_order' => 'Sort order',
+    'column_price' => 'Price',
+    'column_quantity' => 'Quantity',
     'entry_title' => 'Title',
     'entry_description' => 'Description',
     'entry_status' => 'Status',
     'entry_sort_order' => 'Sort order',
+    'entry_price' => 'Price',
+    'entry_quantity' => 'Quantity',
     // Common admin translations
     // Dashboard page translations
     'dashboard' => [

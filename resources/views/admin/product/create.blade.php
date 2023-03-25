@@ -84,6 +84,32 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="price">{{ __('admin.entry_price') }}</label>
+                            <input type="text"
+                                   name="price"
+                                   class="form-control @error('price') is-invalid @enderror"
+                                   id="price"
+                                   value="{{ old('price') }}"
+                                   placeholder="{{ __('admin.entry_price') }}"
+                            >
+                            @error('price')
+                            <span id="price-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">{{ __('admin.entry_quantity') }}</label>
+                            <input type="text"
+                                   name="quantity"
+                                   class="form-control @error('quantity') is-invalid @enderror"
+                                   id="quantity"
+                                   value="{{ old('quantity') }}"
+                                   placeholder="{{ __('admin.entry_quantity') }}"
+                            >
+                            @error('quantity')
+                            <span id="sort-order-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="sort_order">{{ __('admin.entry_sort_order') }}</label>
                             <input type="text"
                                    name="sort_order"
