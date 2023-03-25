@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $categories = $this->getCategoriesList();
+
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -51,9 +55,12 @@ class ProductController extends Controller
             'description' => ['required', 'max:3000'],
             'status' => ['in:0,1', 'required'],
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
+            'category_id' => ['required'],
         ]);
 
-        Product::create($request->all());
+        $product = Product::create($request->all());
+
+        $this->storeProductCategories($product, $request->get('category_id'));
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
     }
@@ -78,7 +85,19 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        return view('admin.product.edit', compact( 'product'));
+        $categories = $this->getCategoriesList();
+
+        $category_id = NULL;
+
+        foreach ($product->categories as $category) {
+            $category_id = $category->id;
+
+            if ($category->parent_id > 0) {
+                break;
+            }
+        }
+
+        return view('admin.product.edit', compact( 'product', 'categories', 'category_id'));
     }
 
     /**
@@ -98,6 +117,7 @@ class ProductController extends Controller
             'description' => ['required', 'max:3000'],
             'status' => ['in:0,1', 'required'],
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
+            'category_id' => ['required'],
         ]);
 
         $product = Product::findOrFail($id);
@@ -105,6 +125,8 @@ class ProductController extends Controller
         $product->fill($request->all());
 
         $product->save();
+
+        $this->storeProductCategories($product, $request->get('category_id'));
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
     }
@@ -124,5 +146,45 @@ class ProductController extends Controller
         Product::destroy($id);
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
+    }
+
+    /**
+     * Builds list of categories.
+     *
+     * @return array
+     */
+    protected function getCategoriesList()
+    {
+        $result = [];
+
+        foreach (Category::rootCategories()->get() as $category) {
+            $result[$category->id] = $category;
+
+            foreach (Category::where('parent_id', '=', $category->id)->get() as $child) {
+                $result[$child->id] = $child;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Stores categories for product.
+     *
+     * @param Product $product
+     *   Product entity.
+     * @param $category_id
+     *   Category ID.
+     */
+    protected function storeProductCategories(Product $product, $category_id) {
+        $product_categories = [$category_id];
+
+        $category = Category::find($category_id);
+
+        if ($category->parent_id > 0) {
+            $product_categories[] = $category->parent_id;
+        }
+
+        $product->categories()->sync($product_categories);
     }
 }

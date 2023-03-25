@@ -24,7 +24,7 @@ class Category extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
     /**
@@ -57,10 +57,10 @@ class Category extends Model
     /**
      * Sets the sort order default value.
      */
-    protected function sort_order(): Attribute
+    protected function sortOrder(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => $value ?? 0,
+            set: fn (?string $value) => ($value ?? 0),
         );
     }
 }

@@ -47,8 +47,8 @@ return [
         'list' => 'Products list',
         'edit' => 'Edit product',
         'add_new' => 'Add new product',
-//        'entry_parent' => 'Parent category',
         'success' => 'Products list edited successfully',
+        'entry_category' => 'Category',
     ],
     // Products page translations
 ];

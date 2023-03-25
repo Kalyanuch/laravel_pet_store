@@ -75,6 +75,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="category_id">{{ __('admin.products.entry_category') }}</label>
+                            <select name="category_id" class="form-control" id="category_id">
+                                <option value="0">{{ __('admin.choose_from_list') }}</option>
+                                @foreach($categories as $item)
+                                    <option value="{{ $item->id }}" @if(old('category_id') == $item->id) selected="selected"@endif>@if($item->parent_id > 0)-- @endif{{ $item->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="sort_order">{{ __('admin.entry_sort_order') }}</label>
                             <input type="text"
                                    name="sort_order"

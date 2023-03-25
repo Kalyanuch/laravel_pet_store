@@ -23,7 +23,7 @@ class Product extends Model
      */
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     /**
@@ -43,10 +43,10 @@ class Product extends Model
     /**
      * Sets the sort order default value.
      */
-    protected function sort_order(): Attribute
+    protected function sortOrder(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => $value ?? 0,
+            set: fn (?string $value) => ($value ?? 0),
         );
     }
 }

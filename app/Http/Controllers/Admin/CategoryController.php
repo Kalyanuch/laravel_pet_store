@@ -119,7 +119,7 @@ class CategoryController extends Controller
 
         $child = Category::where('parent_id', '=', $id)->get();
 
-        if ($child) {
+        if (count($child)) {
             return redirect()->route('admin.categories.index')->with('error_delete', TRUE);
         }
 
