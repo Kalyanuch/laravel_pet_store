@@ -191,7 +191,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ route('admin.dashboard.index') }}" class="nav-link">
+                        <a href="{{ route('admin.dashboard.index') }}" class="nav-link{{ Route::currentRouteName() == 'admin.dashboard.index' ? ' active' : '' }}">
                             <p>{{ __('admin.dashboard.dashboard') }}</p>
                         </a>
                     </li>
