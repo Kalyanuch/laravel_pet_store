@@ -60,6 +60,9 @@
                                             @endauth
                                         </ul>
                                     </li>
+                                    @if(Auth::check() && Auth::user()->isAdmin())
+                                        <li><a href="{{ route('admin.dashboard.index') }}">{{ __('front.text_admin') }}</a></li>
+                                    @endif
                                 </ul>
                             </nav>
                             <div class="header_extra ml-auto">
@@ -175,6 +178,9 @@
                             @endauth
                         </ul>
                     </li>
+                    @if(Auth::check() && Auth::user()->isAdmin())
+                        <li class="page_menu_item menu_mm"><a href="{{ route('admin.dashboard.index') }}">{{ __('front.text_admin') }}</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

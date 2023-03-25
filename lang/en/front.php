@@ -10,5 +10,6 @@ return [
     'text_logout' => 'Logout',
     'text_login' => 'Login',
     'text_register' => 'Register',
+    'text_admin' => 'Admin',
 
 ];
