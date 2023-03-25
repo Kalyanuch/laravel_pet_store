@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return view('front.home');
 })->name('front.homepage');
 
 // Admin routes group
