@@ -13,20 +13,30 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+/**
+ * Implements user registration.
+ */
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
+     *
+     * @return View
+     *   Return view template.
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('front.account.register');
     }
 
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     *   Request service.
+     *
+     * @return RedirectResponse
+     *   Return redirect.
      */
     public function store(Request $request): RedirectResponse
     {
@@ -40,12 +50,13 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => User::ROLE_CUTOMER,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('front.dashboard');
     }
 }

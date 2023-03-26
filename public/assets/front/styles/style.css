@@ -2666,3 +2666,29 @@ label {
     width: 100%;
     margin-top: 83px;
 }
+
+form .error {
+    color: #a71d2a;
+    padding: 8px 0;
+}
+
+.success {
+    color: #1c7430;
+    padding: 8px 0;
+}
+
+form a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6c6a74;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+form a:hover {
+    color: #1b1b1b;
+}
+

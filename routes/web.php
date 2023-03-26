@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\Cart;
 use App\Http\Controllers\Front\Checkout;
 use App\Http\Controllers\Front\Category;
 use App\Http\Controllers\Front\Product;
+use App\Http\Controllers\Account\DashboardController as UserDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,20 @@ Route::get('/', function () {
     return view('front.home');
 })->name('front.homepage');
 
-Route::get('/cart', [Cart::class, 'index'])->name('front.cart');
-Route::get('/checkout', [Checkout::class, 'index'])->name('front.checkout');
-Route::get('/category/{slug}', [Category::class, 'index'])->name('front.category');
-Route::get('/product/{slug}', [Product::class, 'index'])->name('front.product');
+// Front routes group
+Route::group(['as' => 'front.'], function () {
+    Route::middleware(['auth'/*, 'verified'*/])->group(function () {
+        Route::get('/dashboard', UserDashboard::class)->name('dashboard');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    Route::get('/cart', [Cart::class, 'index'])->name('cart');
+    Route::get('/checkout', [Checkout::class, 'index'])->name('checkout');
+    Route::get('/category/{slug}', [Category::class, 'index'])->name('category');
+    Route::get('/product/{slug}', [Product::class, 'index'])->name('product');
+});
 
 // Admin routes group
 Route::middleware(['auth', 'is_admin'])->group(function () {
@@ -38,16 +49,6 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
         Route::resource('/categories', CategoryController::class);
         Route::resource('/products', ProductController::class);
     });
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -8,20 +8,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
+/**
+ * Implements restore user password.
+ */
 class PasswordResetLinkController extends Controller
 {
     /**
      * Display the password reset link request view.
+     *
+     * @return View
+     *   Returns view template.
      */
     public function create(): View
     {
-        return view('auth.forgot-password');
+        return view('front.account.forgot-password');
     }
 
     /**
      * Handle an incoming password reset link request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     *   Request service.
+     *
+     * @return RedirectResponse
+     *   Return redirect.
      */
     public function store(Request $request): RedirectResponse
     {

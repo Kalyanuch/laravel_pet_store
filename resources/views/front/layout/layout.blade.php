@@ -47,7 +47,7 @@
                                         <a href="#">{{ __('front.text_account') }}</a>
                                         <ul>
                                             @auth()
-                                                <li><a href="{{ route('profile.edit') }}">{{ __('front.text_account') }}</a></li>
+                                                <li><a href="{{ route('front.dashboard') }}">{{ __('front.text_account') }}</a></li>
                                                 <li>
                                                     <form method="POST" action="{{ route('logout') }}">
                                                         @csrf
@@ -165,7 +165,7 @@
                         <a href="#">{{ __('front.text_account') }}<i class="fa fa-angle-down"></i></a>
                         <ul class="page_menu_selection menu_mm">
                             @auth()
-                                <li class="page_menu_item menu_mm"><a href="{{ route('profile.edit') }}">{{ __('front.text_account') }}<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="{{ route('front.dashboard') }}">{{ __('front.text_account') }}<i class="fa fa-angle-down"></i></a></li>
                                 <li class="page_menu_item menu_mm">
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
