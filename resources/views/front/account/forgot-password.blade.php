@@ -12,8 +12,8 @@
                             <div class="home_content">
                                 <div class="breadcrumbs">
                                     <ul>
-                                        <li><a href="{{ route('front.homepage') }}">Home</a></li>
-                                        <li>Forgot password?</li>
+                                        <li><a href="{{ route('front.homepage') }}">{{ __('front.text_home') }}</a></li>
+                                        <li>{{ __('front.account.text_forgot_password') }}</li>
                                     </ul>
                                 </div>
                             </div>

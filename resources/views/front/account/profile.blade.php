@@ -12,9 +12,9 @@
                             <div class="home_content">
                                 <div class="breadcrumbs">
                                     <ul>
-                                        <li><a href="{{ route('front.homepage') }}">Home</a></li>
-                                        <li><a href="{{ route('front.dashboard') }}">Account</a></li>
-                                        <li>Profile</li>
+                                        <li><a href="{{ route('front.homepage') }}">{{ __('front.text_home') }}</a></li>
+                                        <li><a href="{{ route('front.dashboard') }}">{{ __('front.text_account') }}</a></li>
+                                        <li>{{ __('front.text_profile') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -29,20 +29,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="section_title">Profile</h1>
+                    <h1 class="section_title">{{ __('front.text_profile') }}</h1>
                 </div>
                 <div class="col-lg 3">
-                    <ul>
-                        <li>
-                            <a href="{{ route('front.profile.edit') }}" class="active">Profile</a>
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a href="{{ route('logout') }}" onclick="this.closest('form').submit(); return false;">{{ __('front.text_logout') }}</a>
-                            </form>
-                        </li>
-                    </ul>
+                    @include('front.account.account_menu')
                 </div>
                 <div class="col-lg-9">
                     <h2>{{ __('front.account.text_edit_profile_title') }}</h2>

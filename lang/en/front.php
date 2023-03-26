@@ -10,6 +10,8 @@ return [
     'text_logout' => 'Logout',
     'text_login' => 'Login',
     'text_register' => 'Register',
+    'text_profile' => 'Profile',
+    'text_dashboard' => 'Dashboard',
     'text_admin' => 'Admin',
     'entry_email' => 'Email',
     'entry_password' => 'Password',
@@ -30,6 +32,7 @@ return [
         'entry_current_password' => 'Current password',
         'text_profile_updated' => 'Profile updated.',
         'text_password_updated' => 'Password updated',
+
     ],
     // Account translations
 ];
