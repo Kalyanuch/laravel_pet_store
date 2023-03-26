@@ -64,3 +64,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Installation instructions
+- Clone this repo into your web folder.
+- Run ```composer install``` and ```npm install```.
+- Setup your database configuration into .env file.
+- Run ```php artisan migrate --seed``` for processing your database with fake data.
+- After that you should see the project homepage.
+
+There are two demo users (with the different permissions) available out of the box, so you can login with the next credentials:
+- ```Login: admin@none.no Password: password``` 
+- ```Login: customer@none.no Password: password```
+
+That's all. Thanks for your attention.
