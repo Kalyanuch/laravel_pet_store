@@ -35,11 +35,9 @@
                                     <li class="hassubs @if(Route::is('category')) active @endif">
                                         <a href="#">{{ __('front.text_categories') }}</a>
                                         <ul>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
+                                            @foreach($menu_categories as $item)
+                                                <li><a href="{{ route('front.category', ['slug' => $item->slug]) }}">{{ $item->title }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li><a href="#">{{ __('front.text_contact') }}</a></li>
