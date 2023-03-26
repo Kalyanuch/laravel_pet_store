@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="home_content">
-                                <div class="home_title">Smart Phones<span>.</span></div>
+                                <div class="home_title">{{ $category->title }}<span>.</span></div>
                                 <div class="home_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p></div>
                             </div>
                         </div>
@@ -20,7 +20,18 @@
             </div>
         </div>
     </div>
-
+    @if(count($child))
+    <div class="categories">
+        <div class="container">
+            <h3>Sub categories</h3>
+            <div class="row">
+                @foreach($child as $item)
+                    <div class="col-lg-2"><a href="{{ route('front.category', ['slug' => $item->slug]) }}">{{ $item->title }}</a></div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @endif
     <!-- Products -->
 
     <div class="products">
@@ -49,138 +60,28 @@
                     </div>
                 </div>
             </div>
+            @if(count($products))
             <div class="row">
                 <div class="col">
-
                     <div class="product_grid">
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_1.jpg') }}" alt=""></div>
-                            <div class="product_extra product_new"><a href="categories.html">New</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">zSmart Phone</a></div>
-                                <div class="product_price">$670</div>
+                        @foreach($products as $item)
+                            <!-- Product -->
+                            <div class="product">
+                                <div class="product_image"><img src="{{ asset('assets/front/images/product_1.jpg') }}" alt=""></div>
+                                <div class="product_extra product_new"><a href="categories.html">New</a></div>
+                                <div class="product_content">
+                                    <div class="product_title"><a href="{{ route('front.product', ['slug' => $item->slug]) }}">{{$item->title}}</a></div>
+                                    <div class="product_price">${{ $item->price }}</div>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_2.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">ySmart Phone</a></div>
-                                <div class="product_price">$520</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_3.jpg') }}" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">xSmart Phone</a></div>
-                                <div class="product_price">$710</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_4.jpg') }}" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">ASmart Phone</a></div>
-                                <div class="product_price">$330</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_5.jpg') }}" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$170</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_6.jpg') }}" alt=""></div>
-                            <div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$240</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_7.jpg') }}" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$70</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_8.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$490</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_9.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$410</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_10.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$365</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_11.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$195</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="{{ asset('assets/front/images/product_12.jpg') }}" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$580</div>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
-                    <div class="product_pagination">
-                        <ul>
-                            <li class="active"><a href="#">01.</a></li>
-                            <li><a href="#">02.</a></li>
-                            <li><a href="#">03.</a></li>
-                        </ul>
-                    </div>
-
+                    @include('front.common.pagination_component', ['items' => $products])
                 </div>
             </div>
+            @else
+                <h4>{{ __('front.text_empty') }}</h4>
+            @endif
         </div>
     </div>
 

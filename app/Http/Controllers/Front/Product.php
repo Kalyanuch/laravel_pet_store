@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product as ModelProduct;
 
 /**
  * Implements catalog product page.
@@ -20,6 +21,12 @@ class Product extends Controller
      */
     public function index($slug)
     {
-        return view('front.catalog.product');
+        $product = ModelProduct::where('slug', '=', $slug)->first();
+
+        if (!$product) {
+            abort(404);
+        }
+
+        return view('front.catalog.product', compact('product'));
     }
 }

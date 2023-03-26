@@ -19,6 +19,7 @@ return [
     'entry_username' => 'User name',
     'entry_confirm' => 'Confirm password',
     'text_save' => 'Save',
+    'text_empty' => 'Nothing found here',
     // Account translations
     'account' => [
         'entry_remember_me' => 'Remember me',

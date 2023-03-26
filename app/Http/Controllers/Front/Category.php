@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use App\Models\Category as ModelCategory;
 
 /**
  * Implements catalog category page.
@@ -23,6 +23,16 @@ class Category extends Controller
      */
     public function index($slug)
     {
-        return view('front.catalog.category');
+        $category = ModelCategory::where('slug', '=', $slug)->first();
+
+        if (!$category) {
+            abort(404);
+        }
+
+        $child = ModelCategory::where('parent_id', '=', $category->id)->get();
+
+        $products = $category->products()->paginate(8);
+
+        return view('front.catalog.category', compact('category', 'child', 'products'));
     }
 }
