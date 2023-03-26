@@ -23,15 +23,23 @@ class Category extends Controller
      */
     public function index($slug)
     {
-        $category = ModelCategory::where('slug', '=', $slug)->first();
+        $category = ModelCategory::where('slug', '=', $slug)
+            ->where('status', '=', '1')
+            ->first();
 
         if (!$category) {
             abort(404);
         }
 
-        $child = ModelCategory::where('parent_id', '=', $category->id)->get();
+        $child = ModelCategory::where('parent_id', '=', $category->id)
+            ->where('status', '=', '1')
+            ->orderBy('sort_order', 'ASC')
+            ->get();
 
-        $products = $category->products()->paginate(8);
+        $products = $category->products()
+            ->where('status', '=', '1')
+            ->orderBy('sort_order', 'ASC')
+            ->paginate(8);
 
         return view('front.catalog.category', compact('category', 'child', 'products'));
     }

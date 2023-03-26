@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product as ModelProduct;
 
 /**
@@ -21,7 +20,9 @@ class Product extends Controller
      */
     public function index($slug)
     {
-        $product = ModelProduct::where('slug', '=', $slug)->first();
+        $product = ModelProduct::where('slug', '=', $slug)
+            ->where('status', '=', '1')
+            ->first();
 
         if (!$product) {
             abort(404);
