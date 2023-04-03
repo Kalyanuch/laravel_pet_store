@@ -112,13 +112,13 @@
                         </div>
                         <div class="form-group">
                             <label for="image">{{ __('admin.entry_image') }}</label>
-                            @if($product->image)
-                                <br/><img src="{{ asset(\Illuminate\Support\Facades\Storage::url($product->image)) }}" width="100" height="100" />
+                            @if($product->thumb)
+                                <br/><img src="{{ asset(\Illuminate\Support\Facades\Storage::url($product->thumb)) }}" width="100" height="100" />
                                 <button type="button" id="remove_image" class="btn btn-danger">{{ __('admin.remove') }}</button>
                             @endif
                             <input type="file"
                                    name="image"
-                                   class="form-control @error('quantity') is-invalid @enderror @if($product->image)d-none @endif"
+                                   class="form-control @error('quantity') is-invalid @enderror @if($product->thumb)d-none @endif"
                                    id="image"
                                    value=""
                                    placeholder="{{ __('admin.entry_image') }}"

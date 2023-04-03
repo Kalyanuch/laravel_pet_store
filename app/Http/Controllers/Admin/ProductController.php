@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\File;
 
 /**
  * Implements products management functionality.
@@ -126,7 +128,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        $product->removeImageCache()->delete();
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
     }
@@ -181,14 +183,15 @@ class ProductController extends Controller
      */
     protected function handleProductImage(Product $product, StoreProductRequest $request) {
         if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('image', 'public');
+            $image_path = $request->file('image')->store('image/product', 'public');
 
             $product->image = $image_path;
             $product->save();
         }
 
         if ($request->get('is_remove_image')) {
-            Storage::disk('public')->delete($product->image);
+//            Storage::disk('public')->delete($product->image);
+            $product->removeImageCache();
             $product->image = '';
             $product->save();
         }
