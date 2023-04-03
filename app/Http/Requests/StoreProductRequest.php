@@ -4,14 +4,17 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategory extends FormRequest
+/**
+ * Validates product entity data.
+ */
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return TRUE;
+        return true;
     }
 
     /**
@@ -23,9 +26,12 @@ class StoreCategory extends FormRequest
     {
         return [
             'title' => ['required', 'max:250'],
+            'description' => ['required', 'max:3000'],
             'status' => ['in:0,1', 'required'],
-            'parent_id' => ['integer', 'required'],
             'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
+            'category_id' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'quantity' => ['required', 'integer'],
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
@@ -48,18 +49,8 @@ class ProductController extends Controller
      *
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'max:250'],
-            'description' => ['required', 'max:3000'],
-            'status' => ['in:0,1', 'required'],
-            'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
-            'category_id' => ['required', 'integer'],
-            'price' => ['required', 'integer'],
-            'quantity' => ['required', 'integer'],
-        ]);
-
         $product = Product::create($request->all());
 
         $this->storeProductCategories($product, $request->get('category_id'));
@@ -83,10 +74,8 @@ class ProductController extends Controller
      *
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         $categories = $this->getCategoriesList();
 
         $category_id = NULL;
@@ -112,23 +101,10 @@ class ProductController extends Controller
      *
      * @return RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        $request->validate([
-            'title' => ['required', 'max:250'],
-            'description' => ['required', 'max:3000'],
-            'status' => ['in:0,1', 'required'],
-            'sort_order' => ['regex:/^[0-9]*$/', 'nullable'],
-            'category_id' => ['required', 'integer'],
-            'price' => ['required', 'integer'],
-            'quantity' => ['required', 'integer'],
-        ]);
-
-        $product = Product::findOrFail($id);
-
-        $product->fill($request->all());
-
-        $product->save();
+        $product->fill($request->all())
+            ->save();
 
         $this->storeProductCategories($product, $request->get('category_id'));
 
@@ -143,11 +119,9 @@ class ProductController extends Controller
      *
      * @return RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        Product::findOrFail($id);
-
-        Product::destroy($id);
+        $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', TRUE);
     }

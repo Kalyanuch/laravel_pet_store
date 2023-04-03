@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategory;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -57,7 +57,7 @@ class CategoryController extends Controller
      * @return RedirectResponse
      *   Redirect response.
      */
-    public function store(StoreCategory $request)
+    public function store(StoreCategoryRequest $request)
     {
         Category::create($request->all());
 
@@ -77,10 +77,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        $category = Category::findOrFail($id);
-
         $parent = Category::rootCategories()->get();
 
         return view('admin.category.edit', compact('parent', 'category'));
@@ -89,17 +87,10 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreCategory $request, string $id)
+    public function update(StoreCategoryRequest $request, Category $category)
     {
-        $category = Category::findOrFail($id);
-
-        if ($category) {
-            $category->title = $request->get('title');
-            $category->status = $request->get('status');
-            $category->parent_id = $request->get('parent_id');
-            $category->sort_order = $request->get('sort_order');
-            $category->save();
-        }
+        $category->fill($request->all())
+            ->save();
 
         return redirect()->route('admin.categories.index')->with('success', TRUE);
     }
@@ -113,17 +104,16 @@ class CategoryController extends Controller
      * @return RedirectResponse
      *   Redirect response.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        $category = Category::findOrFail($id);
-
-        $child = Category::where('parent_id', '=', $id)->get();
+        $child = Category::where('parent_id', '=', $category->id)->get();
 
         if (count($child)) {
-            return redirect()->route('admin.categories.index')->with('error_delete', TRUE);
+            return redirect()->route('admin.categories.index')
+                ->with('error_delete', TRUE);
         }
 
-        Category::destroy($id);
+        $category->delete();
 
         return redirect()->route('admin.categories.index')->with('success', TRUE);
     }

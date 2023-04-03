@@ -50,7 +50,7 @@ class Product extends Model
      */
     public function scopeIsActive(Builder $query): void
     {
-        $query->where('status', '=', 1);
+        $query->where('status', '=', TRUE);
     }
 
     /**
