@@ -13,6 +13,7 @@
                             <div class="home_content">
                                 <div class="home_title">{{ $product->title }}<span>.</span></div>
                                 <div class="home_text"><p>{{ $product->description }}.</p></div>
+                                {{ \Diglactic\Breadcrumbs\Breadcrumbs::view('front.common.breadcrumbs', 'product', $product) }}
                             </div>
                         </div>
                     </div>

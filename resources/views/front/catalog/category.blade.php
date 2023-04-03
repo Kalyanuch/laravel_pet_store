@@ -13,6 +13,7 @@
                             <div class="home_content">
                                 <div class="home_title">{{ $category->title }}<span>.</span></div>
                                 <div class="home_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p></div>
+                                {{ \Diglactic\Breadcrumbs\Breadcrumbs::view('front.common.breadcrumbs', 'category', $category) }}
                             </div>
                         </div>
                     </div>

@@ -11,11 +11,7 @@
                         <h1>{{ __('admin.dashboard.dashboard') }}</h1>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('front.homepage') }}">{{ __('admin.home') }}</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.index') }}">{{ __('admin.admin') }}</a></li>
-                            <li class="breadcrumb-item active">{{ __('admin.dashboard.dashboard') }}</li>
-                        </ol>
+                        {{ \Diglactic\Breadcrumbs\Breadcrumbs::view('admin.common.breadcrumbs', 'admin_dashboard') }}
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

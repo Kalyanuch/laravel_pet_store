@@ -10,12 +10,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="home_content">
-                                <div class="breadcrumbs">
-                                    <ul>
-                                        <li><a href="{{ route('front.homepage') }}">{{ __('front.text_home') }}</a></li>
-                                        <li>{{ __('front.text_register') }}</li>
-                                    </ul>
-                                </div>
+                                {{ \Diglactic\Breadcrumbs\Breadcrumbs::view('front.common.breadcrumbs', 'register') }}
                             </div>
                         </div>
                     </div>
