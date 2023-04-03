@@ -1,11 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Account\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Front\{CartController, CheckoutController, CategoryController as CatalogCategoryController, ProductController as CatalogProductController};
+use App\Http\Controllers\Admin\{
+    DashboardController,
+    CategoryController,
+    ProductController
+};
+use App\Http\Controllers\Front\{
+    CartController,
+    CheckoutController,
+    CategoryController as CatalogCategoryController,
+    ProductController as CatalogProductController
+};
 use App\Http\Controllers\Account\DashboardController as UserDashboard;
 
 /*
