@@ -5,10 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Front\Cart;
-use App\Http\Controllers\Front\Checkout;
-use App\Http\Controllers\Front\Category;
-use App\Http\Controllers\Front\Product;
+use App\Http\Controllers\Front\{CartController, CheckoutController, CategoryController as CatalogCategoryController, ProductController as CatalogProductController};
 use App\Http\Controllers\Account\DashboardController as UserDashboard;
 
 /*
@@ -23,7 +20,6 @@ use App\Http\Controllers\Account\DashboardController as UserDashboard;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
     return view('front.home');
 })->name('front.homepage');
 
@@ -36,10 +32,10 @@ Route::group(['as' => 'front.'], function () {
 //        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    Route::get('/cart', [Cart::class, 'index'])->name('cart');
-    Route::get('/checkout', [Checkout::class, 'index'])->name('checkout');
-    Route::get('/category/{slug}', [Category::class, 'index'])->name('category');
-    Route::get('/product/{slug}', [Product::class, 'index'])->name('product');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/category/{slug}', [CatalogCategoryController::class, 'index'])->name('category');
+    Route::get('/product/{slug}', [CatalogProductController::class, 'index'])->name('product');
 });
 
 // Admin routes group

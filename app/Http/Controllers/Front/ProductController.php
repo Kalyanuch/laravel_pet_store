@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product as ModelProduct;
+use App\Models\Product;
 
 /**
  * Implements catalog product page.
  */
-class Product extends Controller
+class ProductController extends Controller
 {
     /**
      * Display product page.
@@ -20,8 +20,8 @@ class Product extends Controller
      */
     public function index($slug)
     {
-        $product = ModelProduct::where('slug', '=', $slug)
-            ->where('status', '=', '1')
+        $product = Product::isActive()
+            ->where('slug', '=', $slug)
             ->first();
 
         if (!$product) {

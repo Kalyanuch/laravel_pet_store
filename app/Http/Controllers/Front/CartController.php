@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /**
  * Implements customer cart.
  */
-class Cart extends Controller
+class CartController extends Controller
 {
     /**
      * Display customer cart.

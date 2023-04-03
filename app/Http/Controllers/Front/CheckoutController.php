@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /**
  * Implements order checkout.
  */
-class Checkout extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display checkout page.

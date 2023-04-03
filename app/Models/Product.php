@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,18 @@ class Product extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    /**
+     * Gets only enabled products.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return void
+     */
+    public function scopeIsActive(Builder $query): void
+    {
+        $query->where('status', '=', 1);
     }
 
     /**

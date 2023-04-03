@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use App\Models\Category as ModelCategory;
+use App\Models\Category;
 
 /**
  * Implements catalog category page.
  */
-class Category extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display category page.
@@ -23,21 +23,21 @@ class Category extends Controller
      */
     public function index($slug)
     {
-        $category = ModelCategory::where('slug', '=', $slug)
-            ->where('status', '=', '1')
+        $category = Category::isActive()
+            ->where('slug', '=', $slug)
             ->first();
 
         if (!$category) {
             abort(404);
         }
 
-        $child = ModelCategory::where('parent_id', '=', $category->id)
-            ->where('status', '=', '1')
+        $child = Category::isActive()
+            ->where('parent_id', '=', $category->id)
             ->orderBy('sort_order', 'ASC')
             ->get();
 
         $products = $category->products()
-            ->where('status', '=', '1')
+            ->isActive()
             ->orderBy('sort_order', 'ASC')
             ->paginate(8);
 

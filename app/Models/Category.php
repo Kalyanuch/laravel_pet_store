@@ -55,6 +55,18 @@ class Category extends Model
     }
 
     /**
+     * Gets only enabled categories.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return void
+     */
+    public function scopeIsActive(Builder $query): void
+    {
+        $query->where('status', '=', 1);
+    }
+
+    /**
      * Sets the sort order default value.
      */
     protected function sortOrder(): Attribute
