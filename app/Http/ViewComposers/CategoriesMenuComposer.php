@@ -22,6 +22,7 @@ class CategoriesMenuComposer
     public function compose(View $view)
     {
         return $view->with('menu_categories', Category::rootCategories()
+            ->IsActive()
             ->orderBy('sort_order', 'ASC')
             ->get());
     }

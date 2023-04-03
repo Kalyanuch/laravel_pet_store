@@ -29,6 +29,7 @@ return [
     'entry_sort_order' => 'Sort order',
     'entry_price' => 'Price',
     'entry_quantity' => 'Quantity',
+    'entry_image' => 'Image',
     // Common admin translations
     // Dashboard page translations
     'dashboard' => [

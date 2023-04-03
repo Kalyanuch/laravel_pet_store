@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Implements products management functionality.
@@ -52,6 +53,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
+
+        $this->handleProductImage($product, $request);
 
         $this->storeProductCategories($product, $request->get('category_id'));
 
@@ -105,6 +108,8 @@ class ProductController extends Controller
     {
         $product->fill($request->all())
             ->save();
+
+        $this->handleProductImage($product, $request);
 
         $this->storeProductCategories($product, $request->get('category_id'));
 
@@ -164,5 +169,28 @@ class ProductController extends Controller
         }
 
         $product->categories()->sync($product_categories);
+    }
+
+    /**
+     * Handles products image.
+     *
+     * @param \App\Models\Product $product
+     *   Product entity.
+     * @param \App\Http\Requests\StoreProductRequest $request
+     *   Request service.
+     */
+    protected function handleProductImage(Product $product, StoreProductRequest $request) {
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('image', 'public');
+
+            $product->image = $image_path;
+            $product->save();
+        }
+
+        if ($request->get('is_remove_image')) {
+            Storage::disk('public')->delete($product->image);
+            $product->image = '';
+            $product->save();
+        }
     }
 }

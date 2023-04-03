@@ -36,7 +36,7 @@
                         </button>
                     </div>
                 </div>
-                <form method="post" action="{{ route('admin.products.store') }}">
+                <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         @if ($errors->any())
@@ -107,6 +107,19 @@
                             >
                             @error('quantity')
                             <span id="sort-order-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="image">{{ __('admin.entry_image') }}</label>
+                            <input type="file"
+                                   name="image"
+                                   class="form-control @error('quantity') is-invalid @enderror"
+                                   id="image"
+                                   value=""
+                                   placeholder="{{ __('admin.entry_image') }}"
+                            >
+                            @error('image')
+                            <span id="image-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">

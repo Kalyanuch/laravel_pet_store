@@ -36,7 +36,7 @@
                         </button>
                     </div>
                 </div>
-                <form method="post" action="{{ route('admin.products.update', ['product' => $product->id]) }}">
+                <form method="post" action="{{ route('admin.products.update', ['product' => $product->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="card-body">
@@ -108,6 +108,24 @@
                             >
                             @error('quantity')
                             <span id="sort-order-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="image">{{ __('admin.entry_image') }}</label>
+                            @if($product->image)
+                                <br/><img src="{{ asset(\Illuminate\Support\Facades\Storage::url($product->image)) }}" width="100" height="100" />
+                                <button type="button" id="remove_image" class="btn btn-danger">{{ __('admin.remove') }}</button>
+                            @endif
+                            <input type="file"
+                                   name="image"
+                                   class="form-control @error('quantity') is-invalid @enderror @if($product->image)d-none @endif"
+                                   id="image"
+                                   value=""
+                                   placeholder="{{ __('admin.entry_image') }}"
+                            >
+                            <input type="hidden" name="is_remove_image" id="is_remove_image" value="0" />
+                            @error('image')
+                            <span id="image-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">

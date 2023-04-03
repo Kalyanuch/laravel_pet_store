@@ -32,6 +32,8 @@ class StoreProductRequest extends FormRequest
             'category_id' => ['required', 'integer'],
             'price' => ['required', 'integer'],
             'quantity' => ['required', 'integer'],
+            'image' => ['image', 'mimes:jpg,png,jpeg', 'max:2048'],
+            'is_remove_image' => ['in:0,1'],
         ];
     }
 }
